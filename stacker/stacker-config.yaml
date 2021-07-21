@@ -5,19 +5,10 @@ stacker_bucket: ""  # not using S3 buckets to store CloudFormation templates
 
 stacks:
 
-  - name: cassis-kms
-    profile: *stacker_execution_profile
-    template_path: templates/kms.yaml
-    variables:
-      KeyAlias: ${KeyAlias}
-      PipelineStackerRolesStack: ${PipelineStackerRolesStack}
-      PipelineStack: ${PipelineStack}
-
   - name: cassis-s3
     profile: *stacker_execution_profile
     template_path: templates/s3-bucket-template.yaml
     variables:
-      S3Arn: ${output cassis-kms::KMSKeyARN}
       BucketName: $(BucketName)
 
   - name: cassis-vpc
@@ -29,35 +20,3 @@ stacks:
       VpcCIDR: ${VpcCIDR}
       PrivateSubnet1CIDR: ${PrivateSubnet1CIDR}
       PrivateSubnet2CIDR: ${PrivateSubnet2CIDR}
-
-  - name: cassis-ec2
-    profile: *stacker_execution_profile
-    template_path: templates/ec2-instance-template.yaml
-    variables:
-      NetworkStackName: ${NetworkStackName}
-      VpcId: ${output cassis-vpc::PrivateSubnet1}
-
-  - name: cassis-cloudtrail
-    profile: *stacker_execution_profile
-    template_path: templates/cloudtrail.yaml
-    variables:
-      VpcId: ${output cassis-vpc::PrivateSubnet1}
-      NetworkStackName: ${NetworkStackName}
-
-  - name: cassis-mad
-    profile: *stacker_execution_profile
-    template_path: templates/managedAD.yml
-    variables:
-      VpcId: ${output cassis-vpc::PrivateSubnet1}
-      Edition: ${Edition}
-      DomainName: ${DomainName}
-      MicrosoftADShortName: ${MicrosoftADShortName}
-      EnableSingleSignOn: ${EnableSingleSignOn}
-      CreateAlias: ${CreateAlias}
-
-  - name: cassis-endpoints
-    profile: *stacker_execution_profile
-    template_path: templates/endpoints.yaml
-    variables:
-      PrimaryDNS: ${output cassis-mad::DirectoryID}
-      NetworkStackName: ${NetworkStackName}
