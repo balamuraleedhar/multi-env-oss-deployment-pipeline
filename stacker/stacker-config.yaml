@@ -9,7 +9,6 @@ stacks:
     profile: *stacker_execution_profile
     template_path: templates/vpc.yaml
     variables:
-      S3Arn: ${output cassis-s3::S3BucketArn}
       EnvironmentName: ${EnvironmentName}
       VpcCIDR: ${VpcCIDR}
       PrivateSubnet1CIDR: ${PrivateSubnet1CIDR}
