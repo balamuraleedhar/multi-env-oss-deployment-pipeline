@@ -5,12 +5,6 @@ stacker_bucket: ""  # not using S3 buckets to store CloudFormation templates
 
 stacks:
 
-  - name: cassis-s3
-    profile: *stacker_execution_profile
-    template_path: templates/s3-bucket-template.yaml
-    variables:
-      BucketName: $(BucketName)
-
   - name: cassis-vpc
     profile: *stacker_execution_profile
     template_path: templates/vpc.yaml
