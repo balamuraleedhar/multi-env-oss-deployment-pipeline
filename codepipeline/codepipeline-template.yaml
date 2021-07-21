@@ -403,7 +403,7 @@ Resources:
                     - env && ls -l && ruby -v
                     - inspec version
                     - inspec --chef-license=accept
-                    - inspec exec inspec_tests -t aws://us-east-1
+                    - inspec exec inspec_tests -t aws://ap-southeast-2
 
   InfraDeployCodeBuildProject:
     Type: AWS::CodeBuild::Project
