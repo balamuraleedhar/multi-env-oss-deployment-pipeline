@@ -13,3 +13,9 @@ stacks:
       VpcCIDR: ${VpcCIDR}
       PrivateSubnet1CIDR: ${PrivateSubnet1CIDR}
       PrivateSubnet2CIDR: ${PrivateSubnet2CIDR}
+
+  - name: cassis-s3
+    profile: *stacker_execution_profile
+    template_path: templates/s3-bucket-template.yaml
+    variables:
+      BucketName: $(BucketName)
