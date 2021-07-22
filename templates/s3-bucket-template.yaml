@@ -8,7 +8,7 @@ Parameters:
   S3BucketName:
     Type: String
     Description: Unique name to assign to the S3 bucket
-    Default: cassis-testing
+    Default: cassis-eroadtesting
 
   EnvironmentName:
     Description: An environment name that is prefixed to resource names
