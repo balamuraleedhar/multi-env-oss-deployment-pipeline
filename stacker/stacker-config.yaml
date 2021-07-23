@@ -18,4 +18,4 @@ stacks:
     profile: *stacker_execution_profile
     template_path: templates/s3-bucket-template.yaml
     variables:
-      BucketName: $(BucketName)
+      S3BucketName: $(BucketName)
