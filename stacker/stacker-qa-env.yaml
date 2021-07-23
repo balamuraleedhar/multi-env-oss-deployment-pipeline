@@ -5,3 +5,4 @@ PrivateSubnet1CIDR: 10.189.0.0/22
 PrivateSubnet2CIDR: 10.189.4.0/22
 # S3 Template
 S3BucketName: cassis-eroadtest1234
+EnvironmentName: QA
