@@ -1,11 +1,11 @@
 # Global variables
-namespace: cassis
+namespace: Dev-IOTCORE
 stacker_execution_profile: &stacker_execution_profile stacker_execution
 stacker_bucket: ""  # not using S3 buckets to store CloudFormation templates
 
 stacks:
 
-  - name: cassis-vpc
+  - name: Dev-IOTCORE-vpc
     profile: *stacker_execution_profile
     template_path: templates/vpc.yaml
     variables:
@@ -13,9 +13,3 @@ stacks:
       VpcCIDR: ${VpcCIDR}
       PrivateSubnet1CIDR: ${PrivateSubnet1CIDR}
       PrivateSubnet2CIDR: ${PrivateSubnet2CIDR}
-
-  - name: cassis-s3
-    profile: *stacker_execution_profile
-    template_path: templates/s3-bucket-template.yaml
-    variables:
-      S3BucketName: $(BucketName)

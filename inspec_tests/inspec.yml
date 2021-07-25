@@ -13,6 +13,6 @@ supports:
 # Input Variables we will utilize in our integration tests
 inputs:
 - name: CodePipelineRole
-  value: cassis-CodePipelineRole
+  value: Dev-IOTCORE-CodePipelineRole
 - name: CodePipelineBase
-  value: cassis-CodePipelineBase
+  value: Dev-IOTCORE-CodePipelineBase
