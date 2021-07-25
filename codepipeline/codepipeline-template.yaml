@@ -217,6 +217,8 @@ Resources:
         - Effect: "Allow"
           Action:
             - 's3:List*'
+            - 's3:GetObject'
+            - 's3:GetObjectVersion'
           Resource: !Sub 'arn:aws:s3:::${CodePipelineArtifactsS3Bucket}'
       Roles:
         - !Ref CFNNagCodeBuildServiceRole
