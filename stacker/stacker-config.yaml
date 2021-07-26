@@ -5,7 +5,7 @@ stacker_bucket: ""  # not using S3 buckets to store CloudFormation templates
 
 stacks:
 
-  - name: Dev-IOTCORE-vpc
+  - name: vpc
     profile: *stacker_execution_profile
     template_path: templates/vpc.yaml
     variables:
