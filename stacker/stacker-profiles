@@ -1,9 +1,9 @@
 [profile stacker_master]
-role_arn = arn:aws:iam::262464509369:role/Dev-IOTCORE-StackerMasterRole
+role_arn = arn:aws:iam::262464509369:role/Test-IOTCORE-StackerMasterRole
 credential_source = EcsContainer
 role_session_name = stacker_master_role_session
 
 [profile stacker_execution]
-role_arn = arn:aws:iam::510068996231:role/Dev-IOTCORE-StackerExecutionRole
+role_arn = arn:aws:iam::634633532250:role/Test-IOTCORE-StackerExecutionRole
 source_profile = stacker_master
 role_session_name = stacker_master_role_session

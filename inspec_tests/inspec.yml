@@ -13,6 +13,6 @@ supports:
 # Input Variables we will utilize in our integration tests
 inputs:
 - name: CodePipelineRole
-  value: Dev-IOTCORE-CodePipelineRole
+  value: Test-IOTCORE-CodePipelineRole
 - name: CodePipelineBase
-  value: Dev-IOTCORE-CodePipelineBase
+  value: Test-IOTCORE-CodePipelineBase

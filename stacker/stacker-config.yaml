@@ -1,5 +1,5 @@
 # Global variables
-namespace: Dev-IOTCORE
+namespace: Test-IOTCORE
 stacker_execution_profile: &stacker_execution_profile stacker_execution
 stacker_bucket: ""  # not using S3 buckets to store CloudFormation templates
 
