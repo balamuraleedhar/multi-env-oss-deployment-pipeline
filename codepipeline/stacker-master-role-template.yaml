@@ -28,11 +28,15 @@ Resources:
 Outputs:
 
   StackerMasterRoleArn:
-    Value: !GetAtt StackerMasterRole.Arn
+    Value:
+      'Fn::GetAtt': [ StackerMasterRole, Arn ]
     Export:
-      Name: !Sub "${AWS::StackName}-stacker-master-role-arn"
+      Name:
+        'Fn::Sub': "${AWS::StackName}-stacker-master-role-arn"
 
   StackerMasterRoleName:
-    Value: !Ref StackerMasterRole
+    Value:
+      Ref StackerMasterRole
     Export:
-      Name: !Sub "${AWS::StackName}-stacker-master-role-name"
+      Name:
+        'Fn::Sub': "${AWS::StackName}-stacker-master-role-name"

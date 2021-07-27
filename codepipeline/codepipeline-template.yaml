@@ -67,8 +67,9 @@ Resources:
           Action:
             - "sts:AssumeRole"
           Resource: !Sub "arn:aws:iam::${TargetAccount}:role/${Namespace}-StackerExecutionRole"
-      Roles: !ImportValue
-        - 'Fn::Sub': '${NetworkStackNameParameter}-stacker-master-role-name'
+      Roles:
+        Fn::ImportValue:
+          !Sub "${NetworkStackNameParameter}-stacker-master-role-name"
 
 # Service Roles that AWS CodeBuild can assume for Lint, Nag, and Deployment
   CFNNagCodeBuildServiceRole:
@@ -246,8 +247,9 @@ Resources:
         - Effect: "Allow"
           Action:
             - 'sts:AssumeRole'
-          Resource: !ImportValue
-            - 'Fn::Sub': '${NetworkStackNameParameter}-stacker-master-role-arn'
+        - Resource:
+            - !ImportValue
+              'Fn::Sub': '${NetworkStackNameParameter}-stacker-master-role-arn'
       Roles:
         - !Ref DeploymentCodeBuildServiceRole
 
