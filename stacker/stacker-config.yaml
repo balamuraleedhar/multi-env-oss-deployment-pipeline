@@ -1,12 +1,12 @@
 # Global variables
-namespace: Test-IOTCORE
-stacker_execution_profile: &stacker_execution_profile stacker_execution
+namespace: ${Namespace}
+#stacker_execution_profile: &stacker_execution_profile stacker_execution
 stacker_bucket: ""  # not using S3 buckets to store CloudFormation templates
 
 stacks:
 
   - name: vpc
-    profile: *stacker_execution_profile
+    profile: dev-iotcore
     template_path: templates/vpc.yaml
     variables:
       EnvironmentName: ${EnvironmentName}

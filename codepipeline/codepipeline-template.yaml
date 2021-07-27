@@ -49,21 +49,11 @@ Parameters:
     Description: Github account used to connect to GitHub Repo
     Type: String
 
+  NetworkStackNameParameter:
+    Description: Cross-referencing stack name
+    Type: String
+
 Resources:
-  StackerMasterRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub "${Namespace}-StackerMasterRole"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          -
-            Effect: Allow
-            Principal:
-                AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
-            Action:
-              - "sts:AssumeRole"
-      Path: "/"
 
 # Stacker Master Role Assume Role Policies (for Cross-Account Deployments)
   AssumeStackerExecutionRolePolicy:
@@ -77,8 +67,8 @@ Resources:
           Action:
             - "sts:AssumeRole"
           Resource: !Sub "arn:aws:iam::${TargetAccount}:role/${Namespace}-StackerExecutionRole"
-      Roles:
-        - !Ref StackerMasterRole
+      Roles: !ImportValue
+        - 'Fn::Sub': '${NetworkStackNameParameter}-stacker-master-role-name'
 
 # Service Roles that AWS CodeBuild can assume for Lint, Nag, and Deployment
   CFNNagCodeBuildServiceRole:
@@ -256,7 +246,8 @@ Resources:
         - Effect: "Allow"
           Action:
             - 'sts:AssumeRole'
-          Resource: !GetAtt StackerMasterRole.Arn
+          Resource: !ImportValue
+            - 'Fn::Sub': '${NetworkStackNameParameter}-stacker-master-role-arn'
       Roles:
         - !Ref DeploymentCodeBuildServiceRole
 

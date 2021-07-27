@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creates a IAM role for Stacker to be able to assume roles
+
+Parameters:
+
+  Namespace:
+    Description: A prefix used to name provisioned resources
+    Type: String
+    Default: cassis
+
+Resources:
+
+  StackerMasterRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${Namespace}-StackerMasterRole"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+                AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+
+Outputs:
+
+  StackerMasterRoleArn:
+    Value: !GetAtt StackerMasterRole.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-stacker-master-role-arn"
+
+  StackerMasterRoleName:
+    Value: !Ref StackerMasterRole
+    Export:
+      Name: !Sub "${AWS::StackName}-stacker-master-role-name"
