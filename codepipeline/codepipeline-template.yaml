@@ -55,6 +55,13 @@ Parameters:
 
 Resources:
 
+#imported IAM role from another stack
+  ImportedIAMrole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: !ImportValue
+        'Fn::Sub': '${NetworkStackNameParameter}-stacker-master-role-name'
+
 # Stacker Master Role Assume Role Policies (for Cross-Account Deployments)
   AssumeStackerExecutionRolePolicy:
     Type: AWS::IAM::Policy
@@ -68,8 +75,7 @@ Resources:
             - "sts:AssumeRole"
           Resource: !Sub "arn:aws:iam::${TargetAccount}:role/${Namespace}-StackerExecutionRole"
       Roles:
-        Fn::ImportValue:
-          !Sub "${NetworkStackNameParameter}-stacker-master-role-name"
+        - !Ref ImportedIAMrole
 
 # Service Roles that AWS CodeBuild can assume for Lint, Nag, and Deployment
   CFNNagCodeBuildServiceRole:
@@ -247,9 +253,7 @@ Resources:
         - Effect: "Allow"
           Action:
             - 'sts:AssumeRole'
-        - Resource:
-            - !ImportValue
-              'Fn::Sub': '${NetworkStackNameParameter}-stacker-master-role-arn'
+          Resource: !GetAtt ImportedIAMrole.Arn
       Roles:
         - !Ref DeploymentCodeBuildServiceRole
 
