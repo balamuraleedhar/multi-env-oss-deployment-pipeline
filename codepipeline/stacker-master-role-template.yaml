@@ -35,8 +35,7 @@ Outputs:
         'Fn::Sub': "${AWS::StackName}-stacker-master-role-arn"
 
   StackerMasterRoleName:
-    Value:
-      Ref StackerMasterRole
+    Value: !Ref StackerMasterRole
     Export:
       Name:
         'Fn::Sub': "${AWS::StackName}-stacker-master-role-name"
